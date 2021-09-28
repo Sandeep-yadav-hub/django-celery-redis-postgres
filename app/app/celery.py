@@ -11,6 +11,11 @@ app.conf.beat_schedule ={
         'task': "firstApp.tasks.printing",
         'schedule': 15,
         'args':('pkytsky@gmail.com',)
+    },
+    'every-30-seconds': {
+        'task': "firstApp.tasks.add",
+        'schedule': 30,
+        'args':(1000,2000)
     }
 }
 
