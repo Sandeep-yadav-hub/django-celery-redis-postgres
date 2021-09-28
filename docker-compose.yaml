@@ -25,11 +25,24 @@ services:
       - "5432:5432"
   redis:
     image: redis:alpine
-  celery:
+  celery-worker:
     restart: always
     build:
       context: .
-    command:  celery -A app worker -l info
+    command:  sh -c "celery -A app worker -l info"
+    volumes:
+      - ./app:/app
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+      - redis
+      - app
+  celery-beat:
+    restart: always
+    build:
+      context: .
+    command:  sh -c "celery -A app beat -l info"
     volumes:
       - ./app:/app
     env_file:

@@ -9,5 +9,9 @@ from celery import shared_task
 
 @shared_task
 def add(a,b):
-    print(a,b,a+b)
+    time.sleep(int(2) * 10)
     return a+b
+    
+@shared_task
+def printing(email):
+    print(f'Sent mail to {email}')
