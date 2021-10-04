@@ -1,0 +1,22 @@
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: postgresql-db
+  namespace: db
+spec:
+  teamId: "root"
+  volume:
+    size: 1Gi
+  numberOfInstance: 2
+  users:
+    root:
+      - superuser
+      - createdb
+    foo_user: []
+  database:
+    app: root
+  prepraredDatabses:
+    bar: {}
+  postgresql:
+    version: "12"
+
